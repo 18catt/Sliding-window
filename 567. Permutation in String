@@ -2,15 +2,22 @@ class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         if len(s1)>len(s2): return False
         s1count, s2count = {}, {}
+        #take the first characters of length of s1 to compare here
         for i in range(len(s1)):
             s1count[s1[i]] = 1 + s1count.get(s1[i], 0)
             s2count[s2[i]] = 1 + s2count.get(s2[i], 0)
         l = 0
         for r in range(len(s1), len(s2)):
+            #if the first condition matches no need to do further
             if s1count == s2count: return True
+            #add the right character
             s2count[s2[r]] = 1 + s2count.get(s2[r], 0)
+            #remove the left character
             s2count[s2[l]] -= 1
+            #completely remove the left character if it is zero as we are directly comparing hashmaps to be equal
             if s2count[s2[l]]== 0:
                 s2count.pop(s2[l]) 
+            #increment hasmaps everytime
             l += 1
+        #use if else condition as we are not cheacking for the last window in the loop
         return True if s1count==s2count else False
