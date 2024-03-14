@@ -1,0 +1,9 @@
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        res, visited = set(), set()
+        for l in range(len(s)-9):
+            cur = s[l:l+10]
+            if cur in visited:
+                res.add(cur)
+            visited.add(cur)
+        return list(res)
